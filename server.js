@@ -23,6 +23,9 @@ if (!process.env.DISABLE_XORIGIN) {
 app.get('/', function(req, res) {
   res.sendFile(__dirname + "/views/index.html");
 })
+app.use(express.static(__dirname +"/public"));
+app.use(__dirname +"/public", express.static)
+
 // app.get("/",function(req, res) {
 //   res.send('Hello Express');
 // })
