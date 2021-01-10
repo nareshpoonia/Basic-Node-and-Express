@@ -50,8 +50,11 @@ app.get('/now', function(req, res, next){
   req.time = currentTime();
   next();
 }, function(req, res){
-  res.json({time: req.time});
-})
+  res.send({
+    time: req.time
+  });
+}
+);
 
 // app.get("/",function(req, res) {
 //   res.send('Hello Express');
