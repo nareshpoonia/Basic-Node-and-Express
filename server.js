@@ -42,14 +42,13 @@ app.get('/json',function(req,res){
 app.use(express.static(__dirname +"/public"));
 app.use(__dirname +"/public", express.static)
 
-function currentTime() {
-  return new Date().toString();
-}
 
-app.get('/now', function(req, res, next){
-  req.time = currentTime();
+
+app.get('/now', (req, res, next) => {
+  req.time = new Date().toString();
   next();
-}, function(req, res){
+}, 
+(req, res) => {
   res.send({
     time: req.time
   });
