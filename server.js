@@ -42,6 +42,17 @@ app.get('/json',function(req,res){
 app.use(express.static(__dirname +"/public"));
 app.use(__dirname +"/public", express.static)
 
+function currentTime() {
+  return new Date().toString();
+}
+
+app.get('/now', function(req, res, next){
+  req.time = currentTime();
+  next();
+}, function(req, res){
+  res.json({time: req.time});
+})
+
 // app.get("/",function(req, res) {
 //   res.send('Hello Express');
 // })
