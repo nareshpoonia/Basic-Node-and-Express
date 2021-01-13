@@ -8,11 +8,6 @@ var myApp = require('./myApp');
 var express = require('express');
 var app = express();
 
-app.use(function(req, res, next){
-  console.log(req.method + " " + req.path + " - " + req.ip);
-  next();
-})
-
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
     var allowedOrigins = ['https://narrow-plane.gomix.me', 'https://www.freecodecamp.com'];
@@ -25,39 +20,7 @@ if (!process.env.DISABLE_XORIGIN) {
     next();
   });
 }
-app.get('/', function(req, res) {
-  res.sendFile(__dirname + "/views/index.html");
-})
-app.get('/json',function(req,res){
-   if (process.env.MESSAGE_STYLE === "uppercase"){
-    res.json(
-      {"message":"HELLO JSON"}
-      )
-    } else {
-      res.json(
-        {"message":"Hello json"        }
-      )
-    }
-    })
-app.use(express.static(__dirname +"/public"));
-app.use(__dirname +"/public", express.static)
 
-
-
-app.get('/now', (req, res, next) => {
-  req.time = new Date().toString();
-  next();
-}, 
-(req, res) => {
-  res.send({
-    time: req.time
-  });
-}
-);
-
-// app.get("/",function(req, res) {
-//   res.send('Hello Express');
-// })
 var port = process.env.PORT || 3000;
 bGround.setupBackgroundApp(app, myApp, __dirname).listen(port, function(){
   bGround.log('Node is listening on port '+ port + '...')
