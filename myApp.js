@@ -1,7 +1,15 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser')
 console.log("Hello World");
 require('dotenv').config();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
+
 app.get('/', function(req, res) {
     res.sendFile(__dirname + "/views/index.html");
   })
